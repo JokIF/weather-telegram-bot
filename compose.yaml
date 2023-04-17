@@ -1,0 +1,65 @@
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - postgresql
+      - redis
+    restart: always
+    volumes:
+      - user-images:${VOLUME_USER_IMAGES}
+    command:
+      - start
+    networks:
+      - to-db-net
+    ports:
+      - 8000:80
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      GISMETEO_TOKEN: ${GISMETEO_TOKEN}
+      VOLUME_USER_IMAGES: ${VOLUME_USER_IMAGES}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRESQL_USER: ${POSTGRESQL_USER}
+      POSTGRESQL_DB: ${POSTGRESQL_DB}
+      POSTGRESQL_HOST: ${POSTGRESQL_HOST}
+      POSTGRESQL_PORT: ${POSTGRESQL_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_DB: ${REDIS_DB}
+  postgresql:
+    hostname: ${POSTGRESQL_HOST}
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - data-postgresql:/var/lib/postgresql/data
+    networks:
+      - to-db-net
+    ports:
+      - ${POSTGRESQL_PORT}:5432
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_DB: ${POSTGRESQL_DB}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - data-redis:/data
+    command:
+      - "--requirepass"
+      - "${REDIS_PASSWORD}"
+    networks:
+      - to-db-net
+    ports:
+      - ${REDIS_PORT}:6397
+
+volumes:
+  user-images:
+  data-postgresql:
+  data-redis:
+
+networks:
+  to-db-net:
+    driver: bridge

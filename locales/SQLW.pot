@@ -1,0 +1,176 @@
+# Translations template for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-04-13 21:50+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: main_bot/filters/settings_word.py:12 main_bot/utils/handls_keyboards.py:95
+msgid "Settings"
+msgstr ""
+
+#: main_bot/filters/weather_current_word.py:12
+msgid "current weather"
+msgstr ""
+
+#: main_bot/filters/weather_history_word.py:12
+#: main_bot/utils/handls_keyboards.py:94
+msgid "requests history"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:38
+msgid "m/s"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:42
+msgid "mm Hg"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:76
+msgid "calm"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:78
+msgid "N ↑"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:80
+msgid "N-E ↗"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:82
+msgid "E →"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:84
+msgid "S-E ↘"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:86
+msgid "S ↓"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:88
+msgid "S-W ↙"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:90
+msgid "W ←"
+msgstr ""
+
+#: main_bot/sevices/gismeteo_service/gismeteo_API.py:92
+msgid "N-W ↖"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:17 main_bot/utils/handls_keyboards.py:76
+msgid "Yes"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:20 main_bot/utils/handls_keyboards.py:78
+msgid "No"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:26
+msgid "i18n is your language?(i18n){locale}:flag:"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:43
+msgid "Choose your language"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:51
+msgid "get my location"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:55
+msgid "enter your location"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:63
+msgid "cancel"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:68
+msgid "or go back to setting"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:83
+msgid "is correct location?"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:91
+msgid "Current weather"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:99
+msgid "<b>Tickets</b> available"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:101
+msgid "Remaining to update <b>ticket</b>"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:104
+msgid "you can request weather for tickets"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:105
+msgid "1 ticket = 1 request"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:113
+msgid "Change location"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:115
+msgid "Change language"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:124
+msgid "your address:"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:125
+msgid "your language"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:133
+msgid "menu"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:138
+msgid "into the history"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:146
+msgid "okay"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:151
+msgid "your <b>tickets</b> are over"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:160
+msgid "back"
+msgstr ""
+
+#: main_bot/utils/handls_keyboards.py:174
+msgid "Page"
+msgstr ""
+
+#: main_bot/utils/set_commands.py:8
+msgid "return to menu"
+msgstr ""
+
