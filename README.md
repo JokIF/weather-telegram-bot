@@ -1,6 +1,6 @@
 # JokIF's weather-telegram-bot
 
-this bot is exsist as case. [Aiogram](https://github.com/aiogram/aiogram) was used as framework.
+this bot is exsist as case. [Aiogram](https://github.com/aiogram/aiogram) v. 2 was used as framework.
 Gismeteo was used as meteorological resource for weather data
 
 ## this bot can do...
