@@ -1,6 +1,6 @@
 # JokIF's weather-telegram-bot
 
-this bot is exsist as case. [Aiogram](https://github.com/aiogram/aiogram) v. 2 was used as framework.
+this bot exsists as case. [Aiogram](https://github.com/aiogram/aiogram)(branch dev-2.x) was used as framework.
 Gismeteo was used as meteorological resource for weather data
 
 ## this bot can do...
@@ -14,5 +14,5 @@ Gismeteo was used as meteorological resource for weather data
 - docker-compose(if hasn't docker desktop)
 
 ## to start you must do...
-- copy .env.dist to .env and and change values in this file
+- copy .env.dist to .env and change values in this file
 - run bot in docker: in Docker desktop `docker compose up`; in docker-compose `docker-compose up`
