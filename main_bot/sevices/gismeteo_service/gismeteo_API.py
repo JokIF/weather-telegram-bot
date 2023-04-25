@@ -58,12 +58,24 @@ class GismeteoAPI:
     @staticmethod
     def _define_icon(icon_name: str):
         logger.debug(icon_name)
-        if "st" in icon_name:
-            return "st"
-        icon_split = icon_name.split("_")
-        if len(icon_split) == 3:
-            return icon_split[-1]
-        return icon_name
+        match icon_name.split("_"):
+            case [*_, "st"]:
+                return "st"
+            case [*_, ("r1" | "r2" | "r3") as rain]:
+                return rain
+            case [*_, ("s1" | "s2" | "s3") as snow]:
+                return snow
+            case [*_, ("rs1" | "rs2" | "rs3") as rsnow]:
+                return rsnow
+            case [("d" | "n") as day_night, *something]:
+                match something:
+                    case [("c1" | "c2" | "c3") as cloud, *_]:
+                        return f"{day_night}_{cloud}"
+                    case _:
+                        return day_night
+            case ["c1" | "c2" | "c3" as cloud]:
+                return cloud
+
 
     @staticmethod
     def _define_temperature(temper: int, main: bool):
