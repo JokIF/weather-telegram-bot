@@ -16,7 +16,8 @@ RUN set +x \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /app/
-RUN chmod +x /app/script/* \
+RUN sed "s/\r//g" /app/script/pre_form_entrypoint.sh > /app/script/entrypoint.sh \
+    && chmod +x /app/script/* \
     && poetry install -n
 
 # CMD ["/bin/bash"]
