@@ -18,12 +18,12 @@ __ = i18n.gettext
 
 @dp.message_handler(WeatherHistoryWord())
 async def weather_history_start(message: types.Message, user: User):
-    await WeatherStates.history.set()
     state = Dispatcher.get_current().current_state()
     all_images = await all_user_images(user.id)
     if not all_images:
         _, inline = keyboard_weather_history(1, left=False, right=False)
         text = __("you must get request first")
+        await WeatherStates.history.set()
         return await message.answer(text=text, reply_markup=inline)
 
     right = False if len(all_images) == 1 else True
@@ -34,6 +34,7 @@ async def weather_history_start(message: types.Message, user: User):
     async with state.proxy() as data:
         data["bot_mes_id"] = bot_mes.message_id
         data["page"] = 0
+    await WeatherStates.history.set()
     return bot_mes
 
 
@@ -42,7 +43,6 @@ async def weather_history_start(message: types.Message, user: User):
 async def turn_page(clback: types.CallbackQuery, user: User, state: FSMContext):
     urls = await all_user_images(user.id)
     action = keyboard_data.parse(clback.data).get("action")
-    logger.debug(action)
     async with state.proxy() as data:
         page = data["page"]
         bot_mes_id: int = data["bot_mes_id"]

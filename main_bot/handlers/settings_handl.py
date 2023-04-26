@@ -30,7 +30,6 @@ __ = i18n.gettext
 @dp.callback_query_handler(keyboard_data.filter(action='yes_lang'),
                            state=StartStates.start)
 async def setup_location_and_language(clback: types.CallbackQuery, state: FSMContext, user: User, locale):
-    await SettingsStates.select_loc.set()
     data = await state.get_data()
     start = data.get('start')
     result = deque()
@@ -44,6 +43,7 @@ async def setup_location_and_language(clback: types.CallbackQuery, state: FSMCon
     mes_rep_but = await clback.message.answer(text=text, reply_markup=reply)
     result.appendleft(mes_rep_but)
     logger.debug(f'{start}, {type(start)}')
+    await SettingsStates.select_loc.set()
     if not start:
         text, reply = keyboard_cancle_button()
         mes_inl_but = await clback.message.answer(text=text, reply_markup=reply)
@@ -59,12 +59,11 @@ async def setup_location_and_language(clback: types.CallbackQuery, state: FSMCon
                                   StartStates.start))
 async def choose_language(clback: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
-    logger.debug(data)
-    await SettingsStates.select_lang.set()
     text, reply = keyboard_choose_lang()
     if not data.get("start"):
         _, inline_butt = keyboard_cancle_button()
         reply.insert(inline_butt.inline_keyboard.pop().pop())
+    await SettingsStates.select_lang.set()
     return await clback.message.answer(text=text, reply_markup=reply)
 
 

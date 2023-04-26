@@ -25,13 +25,14 @@ async def all_user_images(user_id: int):
 @dp.message_handler(WeatherCurrentWord())
 async def weather_current(message: types.Message, user_loc: LocationUser, locale: str):
     await message.answer_chat_action(types.ChatActions.UPLOAD_PHOTO)
-    await WeatherStates.current_weather.set()
     all_images = await all_user_images(user_loc.user_id)
     available_requests = list(image for image in all_images
                               if (datetime.datetime.utcnow() - image.create_at).days != 0)
 
     if len(all_images) > 9 and available_requests:
         await all_images[-1].delete()
+
+    await WeatherStates.current_weather.set()
 
     if available_requests or len(all_images) < 4:
         url = await gismeteo.draw_image_today(user_loc.lat,
