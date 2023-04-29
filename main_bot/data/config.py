@@ -7,7 +7,7 @@ default_available_requests = 4
 
 project_dir = Path(__file__).parent.parent
 locales_dir = project_dir.parent / 'locales'
-assets_dir = project_dir / 'data' / 'assets'
+assets_dir = project_dir.parent / 'assets'
 
 BOT_TOKEN = env('BOT_TOKEN')
 GISMETEO_TOKEN = env('GISMETEO_TOKEN')
