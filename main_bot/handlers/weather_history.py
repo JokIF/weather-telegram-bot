@@ -1,11 +1,9 @@
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters import Text
 from loguru import logger
 
-from main_bot.data import config
-from main_bot.database import UserImages, User
-from main_bot.init import dp, gismeteo
+from main_bot.database import User
+from main_bot.init import dp
 from main_bot.filters import WeatherHistoryWord
 from main_bot.utils.handls_keyboards import keyboard_weather_history
 from main_bot.handlers.weather_current import all_user_images

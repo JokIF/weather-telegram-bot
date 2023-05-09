@@ -4,7 +4,7 @@ from aiogram import types, Bot, Dispatcher
 from main_bot.utils.redis_static import RedisStorageStatic
 from main_bot.utils.set_commands import set_commands
 from main_bot.sevices.gismeteo_service import GismeteoDraw
-from main_bot.data import config
+from main_bot import config
 
 from loguru import logger
 

@@ -4,7 +4,7 @@ from aiogram import Dispatcher
 from gino.exceptions import UninitializedError
 
 from loguru import logger
-from main_bot.data import config
+from .. import config
 
 
 async def on_start(dp: Dispatcher):

@@ -3,7 +3,7 @@ from .chain_middleware import ChainMiddleware
 from .i18n_middleware import I18nMiddleware
 
 from aiogram import Dispatcher
-from main_bot.data import config
+from .. import config
 from loguru import logger
 
 

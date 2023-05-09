@@ -1,15 +1,14 @@
 from pathlib import Path
 
-import ujson
 from PIL import Image, ImageDraw, ImageFont
 
 import datetime
 from dataclasses import dataclass
 from itertools import dropwhile
-from typing import Tuple, List
+from typing import Tuple
 from uuid import uuid4
 
-from main_bot.data import config
+from ... import config
 from .gismeteo_API import GismeteoAPI
 
 from loguru import logger

@@ -1,19 +1,15 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 
 from sqlalchemy.sql.expression import desc
 
-from main_bot.data import config
+from main_bot import config
 from main_bot.database import LocationUser, UserImages
 from main_bot.init import dp, gismeteo
-from main_bot.middlewares import i18n
 from main_bot.filters import WeatherCurrentWord
 from main_bot.utils.handls_keyboards import keyboard_weather_current, keyboard_weather_current_cancel
 from main_bot.utils import WeatherStates
 
 import datetime
-
-from loguru import logger
 
 
 async def all_user_images(user_id: int):

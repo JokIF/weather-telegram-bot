@@ -12,7 +12,7 @@ import logging
 
 from loguru import logger
 
-from main_bot.data import config
+from main_bot import config
 
 
 class NoGeoException(Exception):

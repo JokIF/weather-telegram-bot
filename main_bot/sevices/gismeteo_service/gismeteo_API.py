@@ -1,15 +1,11 @@
 from aiohttp import ClientSession
-import asyncio
 
 from main_bot.middlewares import i18n
 from .classes import LocalDate
-from main_bot.data import config
 
 from dataclasses import dataclass
-import datetime
 
 from loguru import logger
-import ujson
 
 _ = i18n.gettext
 

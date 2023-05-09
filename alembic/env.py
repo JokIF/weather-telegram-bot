@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from main_bot.data.config import POSTGRESQL_URL
+from main_bot.config import POSTGRESQL_URL
 from main_bot.database import db
 
 # this is the Alembic Config object, which provides
