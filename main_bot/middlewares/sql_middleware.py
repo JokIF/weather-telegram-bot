@@ -1,8 +1,6 @@
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram import types
 
-from loguru import logger
-
 from typing import Union
 from main_bot.database import User, LocationUser
 
@@ -25,6 +23,3 @@ class SqlMiddleware(BaseMiddleware):
 
     async def on_process_callback_query(self, message: types.CallbackQuery, data: dict):
         await self.check_BD(message, data)
-
-    async def on_process_error(self, update, exception, data):
-        logger.debug('on_proc. exc.:\n{}\n{}\n{}'.format(update, exception, data))

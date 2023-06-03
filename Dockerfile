@@ -20,8 +20,7 @@ RUN sed "s/\r//g" /app/script/pre_form_entrypoint.sh > /app/script/entrypoint.sh
     && chmod +x /app/script/* \
     && poetry install -n
 
-# CMD ["/bin/bash"]
 ENTRYPOINT ["entrypoint.sh"]
-# CMD ["start"]
+
 
 

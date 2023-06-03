@@ -6,8 +6,6 @@ from babel import Locale
 
 from main_bot.database import User
 
-from loguru import logger
-
 
 class I18nMiddleware(BaseI18nMiddleware):
     async def get_user_locale(self, action: str, args: Tuple[Any]) -> Optional[str]:
@@ -24,4 +22,3 @@ class I18nMiddleware(BaseI18nMiddleware):
                 data['locale'] = locale.language
                 return locale.language
         return self.default
-

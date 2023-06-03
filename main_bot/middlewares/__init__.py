@@ -8,11 +8,12 @@ from loguru import logger
 
 
 i18n = I18nMiddleware('SQLW', path=config.locales_dir)
+
+
 def setup(dp: Dispatcher):
     logger.info('middlewares setup')
     dp.middleware.setup(i18n)
     dp.middleware.setup(SqlMiddleware())
-    # dp.middleware.setup(ErrorMiddleware())
     dp.middleware.setup(ChainMiddleware())
 
 
