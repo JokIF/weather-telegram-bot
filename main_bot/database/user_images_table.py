@@ -2,8 +2,6 @@ from sqlalchemy import Column, Integer, TIMESTAMP, String
 
 from .user_table import RelateUser
 
-import datetime
-
 
 class UserImages(RelateUser):
     __tablename__ = "user_images"

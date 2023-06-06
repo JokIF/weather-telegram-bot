@@ -1,9 +1,8 @@
-from aiogram import types, Dispatcher
-from main_bot.middlewares import i18n
-
-_ = i18n.gettext
+from aiogram.utils.i18n import gettext as __
+from aiogram import Bot, types
 
 
-async def set_commands(dp: Dispatcher):
+async def set_commands(bot: Bot):
     command = [types.BotCommand("/menu", "Return to menu")]
-    await dp.bot.set_my_commands(command)
+    await bot.set_my_commands(command)
+#old

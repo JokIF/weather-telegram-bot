@@ -1,7 +1,7 @@
-from aiogram.utils.executor import Executor
-from aiogram import types, Bot, Dispatcher
+from aiogram import types, Bot, Dispatcher, Router
+from aiogram.fsm.storage.redis import RedisStorage, DefaultKeyBuilder
 
-from main_bot.utils.redis_static import RedisStorageStatic
+from main_bot.utils.redis_static import redis_main
 from main_bot.utils.set_commands import set_commands
 from main_bot.sevices.gismeteo_service import GismeteoDraw
 from main_bot import config
@@ -10,35 +10,35 @@ from loguru import logger
 
 
 gismeteo = GismeteoDraw(config.GISMETEO_TOKEN)
-bot = Bot(config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-storage = RedisStorageStatic(host=config.REDIS_HOST,
-                             port=config.REDIS_PORT,
-                             db=config.REDIS_DB,
-                             password=config.REDIS_PASSWORD)
-dp = Dispatcher(bot=bot, storage=storage)
-executor = Executor(dp)
+bot = Bot(config.BOT_TOKEN, parse_mode="HTML")
+redis_static = RedisStorage(redis_main,
+                            key_builder=DefaultKeyBuilder(prefix="static"))
+storage = RedisStorage(redis_main)
+dp = Dispatcher(storage=storage)
+sql_router = Router(name="sql")
+trash_router = Router(name="trash")
 
 
-async def notify_all_working(disp: Dispatcher):
+async def notify_all_working(bot: Bot):
     logger.info('all working')
 
 
-async def close_redis(disp: Dispatcher):
+async def close_redis(bot: Bot):
     logger.info('redis closing')
-    await disp.storage.close()
+    await dp.storage.close()
 
 
 def setup():
+    import main_bot.handlers
+    dp.include_router(sql_router)
+    dp.include_router(trash_router)
+
     import main_bot.middlewares as middlewares
     middlewares.setup(dp)
 
-    import main_bot.filters as filters
-    filters.setup(dp)
-
-    import main_bot.handlers
-
     import main_bot.database as database
-    database.setup(executor)
-    executor.on_startup(set_commands)
-    executor.on_startup(notify_all_working)
-    executor.on_shutdown(close_redis)
+    database.setup(dp)
+
+    # dp.startup.register(set_commands)
+    dp.startup.register(notify_all_working)
+    dp.shutdown.register(close_redis)

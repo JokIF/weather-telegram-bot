@@ -1,13 +1,11 @@
 from aiohttp import ClientSession
 
-from main_bot.middlewares import i18n
+from aiogram.utils.i18n import gettext as _
 from .classes import LocalDate
 
 from dataclasses import dataclass
 
 from loguru import logger
-
-_ = i18n.gettext
 
 
 class GismeteoAPI:

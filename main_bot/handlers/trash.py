@@ -1,12 +1,14 @@
-from aiogram.utils.exceptions import MessageToDeleteNotFound
+from aiogram.exceptions import TelegramNotFound
 from aiogram import types
+from loguru import logger
 
-from main_bot.init import dp
+from main_bot.init import trash_router
 
 from contextlib import suppress
 
 
-@dp.message_handler(state='*')
+@trash_router.message()
 async def trash(message: types.Message):
-    with suppress(MessageToDeleteNotFound):
+    logger.debug("here")
+    with suppress(TelegramNotFound):
         await message.delete()

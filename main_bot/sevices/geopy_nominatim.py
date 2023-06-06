@@ -7,7 +7,7 @@ from geopy.adapters import AioHTTPAdapter
 from geopy.exc import GeocoderTimedOut
 
 from functools import singledispatchmethod
-from typing import Union
+from typing import Optional, Union
 import logging
 
 from loguru import logger
@@ -24,7 +24,7 @@ class DefineLoc:
         self.location = None
         self.location_user = location
         self.language = language
-        self.lat = None
+        self.lat: Optional[int] = None
         self.lon = None
 
     async def define(self):

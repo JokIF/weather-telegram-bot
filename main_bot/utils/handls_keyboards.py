@@ -1,31 +1,31 @@
+from aiogram.filters.callback_data import CallbackData
+from aiogram.utils.i18n import gettext as _
 from aiogram import types
-from aiogram.utils.callback_data import CallbackData
 from babel import Locale
 from loguru import logger
 
 from main_bot.utils.formating import u, b, i
-from main_bot.middlewares import i18n
 
-_ = i18n.gettext
 
-keyboard_data = CallbackData('main', 'action')
+class KeyboardData(CallbackData, prefix="my"):
+    action: str
 
 
 def keyboard_accep_lang(locale):
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_('Yes', locale=locale),
-                                       callback_data=keyboard_data.new('yes_lang')),
+                                       callback_data=KeyboardData(action='yes_lang').pack()),
 
             types.InlineKeyboardButton(text=_('No', locale=locale),
-                                       callback_data=keyboard_data.new('no_lang'))
+                                       callback_data=KeyboardData(action='no_lang').pack())
         ]
     ])
     logger.debug(f'{locale} {type(locale)}')
-
-    text = _('i18n is your language?(i18n){locale}:flag:', locale=locale).format(
-        locale=Locale('en').languages[locale].lower())
-
+    logger.debug(Locale('en').languages[locale].lower())
+    text = _('i18n is your language?(i18n){locale}:flag:', locale=locale)
+    logger.debug(text)
+    text = text.format(locale=locale)
     return text, inline
 
 
@@ -33,10 +33,10 @@ def keyboard_choose_lang():
     inline = types.InlineKeyboardMarkup(row_width=2, inline_keyboard=[
         [
             types.InlineKeyboardButton(text='Русский🇷🇺',
-                                       callback_data=keyboard_data.new('ru')),
+                                       callback_data=KeyboardData(action='ru').pack()),
 
             types.InlineKeyboardButton(text='English🇺🇸',
-                                       callback_data=keyboard_data.new('en'))
+                                       callback_data=KeyboardData(action='en').pack())
         ]
     ])
 
@@ -61,7 +61,7 @@ def keyboard_cancle_button():
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_('cancel'),
-                                       callback_data=keyboard_data.new('cancel_to_sett'))
+                                       callback_data=KeyboardData(action='cancel_to_sett').pack())
         ]
     ])
 
@@ -74,9 +74,9 @@ def keyboard_accep_loc(location: str):
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_('Yes'),
-                                       callback_data=keyboard_data.new('yes_loc')),
+                                       callback_data=KeyboardData(action='yes_loc').pack()),
             types.InlineKeyboardButton(text=_('No'),
-                                       callback_data=keyboard_data.new('no_loc'))
+                                       callback_data=KeyboardData(action='no_loc').pack())
         ]
     ])
 
@@ -111,13 +111,13 @@ def keyboard_settings_menu(address: str, language: str):
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_('Change location') + "🏰",
-                                       callback_data=keyboard_data.new('change_loc')),
+                                       callback_data=KeyboardData(action='change_loc').pack()),
             types.InlineKeyboardButton(text=_('Change language') + "🗣",
-                                       callback_data=keyboard_data.new('change_lang'))
+                                       callback_data=KeyboardData(action='change_lang').pack())
         ],
         [
             types.InlineKeyboardButton(text="↩",
-                                       callback_data=keyboard_data.new('back_main'))
+                                       callback_data=KeyboardData(action='back_main').pack())
         ]
     ])
 
@@ -131,7 +131,7 @@ def keyboard_weather_current():
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_("menu"),
-                                       callback_data=keyboard_data.new('back_main'))
+                                       callback_data=KeyboardData(action='back_main').pack())
         ]
     ])
 
@@ -144,7 +144,7 @@ def keyboard_weather_current_cancel():
     inline = types.InlineKeyboardMarkup(inline_keyboard=[
         [
             types.InlineKeyboardButton(text=_('okay'),
-                                       callback_data=keyboard_data.new('back_main'))
+                                       callback_data=KeyboardData(action='back_main').pack())
         ]
     ])
 
@@ -158,17 +158,17 @@ def keyboard_weather_history(page, left=False, right=True):
         [],
         [
             types.InlineKeyboardButton(text=_('back'),
-                                       callback_data=keyboard_data.new('back_main'))
+                                       callback_data=KeyboardData(action='back_main').pack())
         ]
     ])
 
     if left:
         button_left = types.InlineKeyboardButton(text='<<',
-                                                 callback_data=keyboard_data.new('left'))
+                                                 callback_data=KeyboardData(action='left').pack())
         inline.inline_keyboard[0].append(button_left)
     if right:
         button_right = types.InlineKeyboardButton(text='>>',
-                                                  callback_data=keyboard_data.new('right'))
+                                                  callback_data=KeyboardData(action='right').pack())
         inline.inline_keyboard[0].append(button_right)
 
     text = "📃" + _('Page') + f' {page}'

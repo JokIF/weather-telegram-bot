@@ -13,5 +13,5 @@ def cli(debug):
 
 @cli.command()
 def start():
-    from main_bot.init import executor
-    executor.start_polling()
+    from main_bot.init import dp, bot
+    dp.run_polling(bot)
