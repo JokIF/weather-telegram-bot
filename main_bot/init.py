@@ -16,6 +16,7 @@ redis_static = RedisStorage(redis_main,
 storage = RedisStorage(redis_main)
 dp = Dispatcher(storage=storage)
 sql_router = Router(name="sql")
+token_router = Router(name="token")
 trash_router = Router(name="trash")
 
 
@@ -30,6 +31,7 @@ async def close_redis(bot: Bot):
 
 def setup():
     import main_bot.handlers
+    sql_router.include_router(token_router)
     dp.include_router(sql_router)
     dp.include_router(trash_router)
 
