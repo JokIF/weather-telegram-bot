@@ -10,6 +10,7 @@ project_dir = Path(__file__).parent
 locales_dir = project_dir.parent / 'locales'
 assets_dir = project_dir.parent / 'assets'
 
+env.read_envfile(project_dir.parent / ".env")
 
 BOT_TOKEN = env('BOT_TOKEN')
 GISMETEO_TOKEN = env('GISMETEO_TOKEN')

@@ -13,7 +13,6 @@ class SqlMiddleware(BaseMiddleware):
                        handler, 
                        event: Union[types.Message, types.CallbackQuery], 
                        data: Dict[str, Any]):
-        logger.debug(f"{event}, {type(event)}")
         user: User = await User.query.where(User.id == event.from_user.id).gino.first()
         if user is None:
             user: User = await User.create(id=event.from_user.id,
@@ -23,7 +22,6 @@ class SqlMiddleware(BaseMiddleware):
             LocationUser.user_id == event.from_user.id).gino.first()
         data['user'] = user
         data['user_loc'] = user_loc
-        logger.debug(f"here {user}\n{data}")
         return await handler(event, data)
 
     def setup(self, router, *events):

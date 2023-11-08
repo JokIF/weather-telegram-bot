@@ -1,6 +1,7 @@
 from aiogram import types, flags
 from aiogram.fsm.context import FSMContext
 
+from asyncpg.exceptions import UniqueViolationError
 from sqlalchemy.sql.expression import desc
 
 from main_bot import config
@@ -11,6 +12,7 @@ from main_bot.utils.handls_keyboards import keyboard_weather_current, keyboard_w
 from main_bot.utils import WeatherStates
 
 import datetime
+from contextlib import suppress
 
 
 async def all_user_images(user_id: int) :
@@ -37,9 +39,11 @@ async def weather_current(message: types.Message, user_loc: LocationUser, locale
                                               user_loc.address,
                                               locale,
                                               config.USERS_IMGS)
-        await UserImages.create(user_id=user_loc.user_id,
-                                url=str(url),
-                                create_at=datetime.datetime.utcnow())
+        with suppress(UniqueViolationError):
+            await UserImages.create(user_id=user_loc.user_id,
+                                    url=str(url),
+                                    create_at=datetime.datetime.utcnow())
+
 
         return_ = []
         photo = types.BufferedInputFile.from_file(url, "weather_photo")

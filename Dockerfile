@@ -17,8 +17,8 @@ RUN set +x \
 
 COPY . /app/
 RUN sed "s/\r//g" /app/script/pre_form_entrypoint.sh > /app/script/entrypoint.sh \
-    && chmod +x /app/script/* \
-    && poetry install -n
+    && chmod +x /app/script/*
+RUN poetry install -n
 
 ENTRYPOINT ["entrypoint.sh"]
 
